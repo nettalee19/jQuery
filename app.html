@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <input type="text" placeholder="רשימת קניות " id="shopListItem" />
+        <button type="button" id="addToShopList">הוסף לרשימת הקניות </button>
+    </form>
+    <ul id="shopList">
+
+    </ul>
+
+    <script>
+        $(document).ready(function () {
+            const onAddHandler = function () {
+            const item = $('#shopListItem').val();
+            console.log(item);
+            };
+            $('#addToShopList').click(onAddHandler); 
+        });
+
+
+        //$('#shopList').append('<li>פריט ברשימה </li>');
+
+        // $(document).ready(function () {
+        //     const onAddHandler = function () {
+        //     $('#shopList').append('<li>פריט ברשימה </li>');
+        //     };
+        //     $('#addToShopList').click(onAddHandler);
+        // });
+
+        // $(document).ready(function () {
+        //     const onAddHandler = function () {
+        //     const item = $('#shopListItem').val();
+        //     $('#shopList').prepend(`<li>${item}<span class="deleteItem"> X </span></li>`);
+        //     $('#shopList').on('click', '.deleteItem', onDeleteHandler);
+        //     };
+        //     $('#addToShopList').click(onAddHandler);
+        //     $('#addToShopList').on('click', onAddHandler);
+        // });
+
+        $(document).ready(function () {
+            const onAddHandler = function () {
+            const item = $('#shopListItem').val();
+            $('#shopList').append(`<li>${item}<span class="deleteItem"> X </span></li>`);
+            };
+            const onDeleteHandler = function () {
+                $('this').remove();
+            console.log('Delete activated');
+            };
+            $('#addToShopList').on('click', onAddHandler);
+            $('#shopList').on('click', '.deleteItem', onDeleteHandler);
+        });
+        
+    </script>
+</body>
+</html>

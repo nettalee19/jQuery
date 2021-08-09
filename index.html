@@ -7,17 +7,122 @@
     <link rel="stylesheet" href="./style/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Document</title>
+    
 </head>
 <body>
+    <style>
+        .rectangle {
+        border: 1px solid black;
+        height: 100px;
+        width: 100px;
+        }
+        .on {
+        background-color: yellow;
+        }
+        </style>
+
     <div>
         <button class="myBtn">this is button</button>
-
+        <div class="hW">
+            <p>hello</p>
+            <h1>hello world</h1>
+        </div>
+        <div>
+            <p>hello</p>
+            <p>hello</p>
+            <p>hello</p>
+            <p>hello</p>
+        </div>
+        <div class="hello-netta">
+            Netta
+        </div>
     </div>
+    <div>
+        <button class="toggleButton" type="button">לחיצה </button>
+    </div>
+    <div class="rectangle"></div>
+
+    <h1 id="header">כותרת </h1>
+        <div>
+        <div class="rectangle"> אלמנט 1 - לחץ עלי </div>
+        </div>
+        <div>
+        <div class="rectangle"> אלמנט 2 - לחץ עלי </div>
+        </div>
+        <div>
+            <div class="rectangle"> אלמנט 3 - לחץ עלי </div>
+            </div>
 
     <script>
         $(function(){
             $(".myBtn").fadeOut(1000).delay(100).fadeToggle(500)
         })
+
+        //(($) => {
+            $(document).ready(() => {
+            const headerElement = $('.hW');
+            headerElement.css('color', 'red');
+            });
+        //})(jQuery);
+
+        $(document).ready(function () {
+            $('p').css('color', 'orange');
+        });
+
+        $(document).ready(function () {
+            const headerElement = $('.hello-netta');
+            const newStyle = {
+            color: 'red',
+            direction: 'rtl',
+            'text-align': 'center',
+            'background-color': 'gold',
+            }
+            headerElement.css(newStyle);
+            console.log(headerElement.css('color')); // rgb(255, 0, 0)
+            console.log(headerElement.css('display')); // block
+        });
+
+        $(document).ready(function () {
+            const headerElement = $('.hello-netta');
+            headerElement.addClass('exampleClass');
+        });
+
+        $(document).ready(function () {
+            const buttonElement = $('.toggleButton');
+            buttonElement.on('click', function(ev) { console.log(ev)});
+            //buttonElement.on('click', function() { console.log('Hello') });
+        });
+
+        // $(document).ready(function () {
+        //     const buttonElement = $('.toggleButton');
+        //     buttonElement.on('click', function() {
+        //         $('.rectangle').toggleClass('on');
+        //     //$('.rectangle').addClass('on');
+        //     });
+        // });
+
+        // $(document).ready(function () {
+        //     const recElement = $('.rectangle');
+        //     recElement.on('click', function () {
+        //     $(this).toggleClass('on');
+        //     });
+        // });
+
+        const recElement = $('.rectangle');
+            const onHandler = function () {
+            $(this).toggleClass('on');
+            };
+            recElement.on('click', onHandler);
+
+            // $(document).ready(function () {
+            // const onHandler = function () {
+            // $(this).toggleClass('on');
+            // };
+            // $('.rectangle').on('click', onHandler);
+        
+
+        const jQueryInstance = jQuery();
+        console.log(jQueryInstance.jquery);
     </script>
 </body>
 </html>
