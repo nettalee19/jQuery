@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        
+
+        <div id="dadJokeOutput">
+        </div>
+        <button type="button" id="callAjax">ספרו לי בדיחת אבא </button>
+    
+        <br>
+
+
+
+
+        <input id="new-name" type="text">
+        <button id="addingName">add new name</button>
+
+        <form action="">
+            <ul id="name-list">
+
+            </ul>
+        </form>
+
+        <div id="all-names"></div>
+    
+    </div>
+
+    <script>
+        let allNames = document.getElementById('all-names')
+        let names = ["Avi", "Netta", "Aya"]
+
+        names.map(person =>{
+            let p = document.createElement("h2")
+            let data = document.createTextNode(person)
+            p.appendChild(data)
+            //document.body.appendChild(p)
+            // $('#all-names').appendChild(p)
+            allNames.appendChild(p);
+
+        })
+
+        $(document).ready(function(){
+            // names.map(person =>{
+            //     let p = document.createElement("h2")
+            //     let data = document.createTextNode(person)
+            //     p.appendChild(data)
+            //     document.body.appendChild(p)
+
+            // })
+
+            const addName = function(){
+                const name = $("#new-name").val()
+                console.log(name)
+                $.ajax({
+                    //type: 'POST',
+                    //error: () =>  $(names).text('sorry, error'),
+                    error: function(){
+                        console.log("there is some error")
+                    },
+                    success: function (data) {
+                        //$(data).push("irit")
+                        names.push(name)
+                        console.log(names)
+                        $('#name-list').append(`<li>${name}</li>`)
+                        $(allNames).append(`${name}`)
+                    } ,
+                })
+            }
+            $('#addingName').on('click', addName)
+        })
+
+        $(document).ready(function() {
+            const onClickHandler = function(){
+                const ajaxOptions = {
+                    headers: {Accept: 'text/plain'},
+                    success: (data) => $('#dadJokeOutput').text(data),
+                    error: () =>  $('#dadJokeOutput').text('sorry, error'),
+                }
+                $.ajax('https://icanhazdadjoke.com', ajaxOptions)
+            }
+            $('#callAjax').on('click', onClickHandler)
+        })
+    </script>
+</body>
+</html>
