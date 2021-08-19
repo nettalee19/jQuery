@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <fieldset>  
+        <div class="form-horizontal">  
+            <div class="editor-label">  
+                Name  
+            </div>  
+            <div class="editor-label">  
+                <input type="text" id="txtName" />  
+            </div>  
+      
+            <div class="editor-label">  
+                Address  
+            </div>  
+            <div class="editor-label">  
+                <input type="text" id="txtAddress" />  
+            </div>  
+      
+            <div class="editor-label">  
+                City  
+            </div>  
+            <div class="editor-label">  
+                <input type="text" id="txtcity" />  
+            </div>  
+            <div class="editor-label">  
+                <br />  
+                <input class="btn-default" type="button" id="btnSave" value="Save" />  
+            </div>  
+        </div>  
+    </fieldset>
+
+    <script>  
+        $(document).ready(function () { 
+    //function will be called on button click having id btnsave
+            $("#btnSave").click(function () { 
+                $.ajax(  
+                {  
+                    type: "POST", //HTTP POST Method  
+                    url: "Home/AddEmployee", // Controller/View   
+                    data: { //Passing data  
+                        Name: $("#txtName").val(), //Reading text box values using Jquery   
+                        City: $("#txtAddress").val(),  
+                        Address: $("#txtcity").val()  
+                    }  
+      
+                });  
+      
+            });  
+        });  
+      
+    </script> 
+</body>
+</html>

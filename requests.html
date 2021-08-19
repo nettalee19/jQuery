@@ -23,7 +23,7 @@
         <input id="new-name" type="text">
         <button id="addingName">add new name</button>
 
-        <form action="">
+        <form id="costumers" action="">
             <ul id="name-list">
 
             </ul>
@@ -69,13 +69,27 @@
                         //$(data).push("irit")
                         names.push(name)
                         console.log(names)
-                        $('#name-list').append(`<li>${name}</li>`)
+                        $('#name-list').append(`<li>${name}</li> <button class="js-delete">Delete</button>`)
                         $(allNames).append(`${name}`)
                     } ,
                 })
             }
             $('#addingName').on('click', addName)
         })
+
+        // $(document).ready(function(){
+        //     $("#costumers .js-delete").on("click", function(){
+        //         //if(confirm("Are you sure?")){
+        //             $.ajax({
+        //                 //url:
+        //                 method: "DELETE",
+        //                 success: function(){
+        //                     console.log("good")
+        //                 }
+        //             })
+        //         //}
+        //     })
+        // })
 
         $(document).ready(function() {
             const onClickHandler = function(){
