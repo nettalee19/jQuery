@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>All Students in system</h2>
+    <div id="students"></div>
+    <br />
+
+    <h3>Add a new student</h3>
+   <label for="">Id:</label>  <input id="student-id" type="text"> 
+   <label for="">First Name:</label>  <input id="student-first-name" type="text">
+   <label for="">Last Name:</label>  <input id="student-last-name" type="text">
+   <label for="">Address:</label>  <input id="student-address" type="text">
+
+</body>
+</html>
+
+<script>
+    let object = {
+        type: ''
+    }
+
+    function renderDataSTD(allData) {
+        var cols = ['Number', 'Id', 'First Name', 'Last Name', 'Address']
+
+        //table, header
+        var t = document.createElement('table');
+
+        t.appendChild(document.createElement('thead'));
+        t.querySelector('thead').appendChild(document.createElement('tr'));
+
+        for (var i = 0; i < cols.length; i++) {
+            var heading = document.createElement('td');
+            heading.textContent = cols[i];
+            t.querySelector('thead tr').appendChild(heading);
+        }
+
+        document.getElementById('students').appendChild(t);
+
+        //rows
+        for (var i = 0; i < allData.length; i++) {
+
+            var s = allData[i];
+            var r = document.createElement('tr');
+
+            r.dataset.personId = s.STD_Id;
+
+            var numberCell = document.createElement('td');
+            numberCell.textContent = s.STD_No;
+            numberCell.classList.add('number');
+            numberCell.dataset.personId = s.STD_Id;
+
+            var idCell = document.createElement('td');
+            idCell.textContent = s.STD_Id;
+            idCell.classList.add('id');
+            idCell.dataset.personId = s.STD_Id;
+
+            var nameCell = document.createElement('td');
+            nameCell.textContent = s.STD_First_Name;
+            nameCell.classList.add('name');
+            nameCell.dataset.personId = s.STD_Id;
+
+            var lastCell = document.createElement('td');
+            lastCell.textContent = s.STD_Last_Name;
+            lastCell.classList.add('last');
+            lastCell.dataset.personId = s.STD_Id;
+
+            var addressCell = document.createElement('td');
+            addressCell.textContent = s.STD_Address;
+            addressCell.classList.add('name');
+            addressCell.dataset.personId = s.STD_Id;
+
+
+            r.appendChild(numberCell);
+            r.appendChild(idCell);
+            r.appendChild(nameCell);
+            r.appendChild(lastCell);
+            r.appendChild(addressCell);
+
+            t.appendChild(r);
+            }
+    }
+
+     
+     
+
+
+    // function getSdudents(std_no = 0) {
+    //     alert(std_no);
+        $.ajax({
+            type: "POST",
+            url: "NetaStudy.aspx/GetStudents",
+            data: JSON.stringify(object),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                debugger;
+                alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+            },
+            success: function (result) {
+                debugger;
+
+                let primData = JSON.parse(result.d);
+                let allData = primData.Table;
+                console.log(allData);
+                console.log(allData[0].STD_First_Name);
+
+                renderDataSTD(allData)
+            }
+        });
+    //}
+
+
+
+
+
+
+    //adding
+    $(document).ready(function(){
+        var student = {};
+        student.id = $(`#student-id`).val();
+        student.firstName = $(`#student-first-name`).val();
+        student.lastName = $(`#student-last-name`).val();
+        student.address = $(`#student-address`).val();
+        
+        $.ajax({
+            url: "NetaStudy.aspx/GetStudents",
+            method: 'POST',
+            data: JSON.stringify(student),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function () {  
+                //getStudents();  
+                console.log(data);  
+            },  
+            error: function (err) {  
+                console.log(err);  
+            }
+        })
+    })
+</script>
